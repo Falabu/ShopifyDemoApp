@@ -23,7 +23,7 @@ class CostumerList
         echo "<h2>Vásárlók listája</h2>";
         echo "<table class='table table-hover table-dark table-sm'>";
         echo "<tr>
-        <th>Vezetéknév 5</th>
+        <th>Vezetéknév</th>
         <th>Keresztnév</th>
         <th>E-mail</th> 
         <th>Létrehozás dátuma</th>
