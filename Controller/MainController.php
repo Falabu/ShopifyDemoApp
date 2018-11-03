@@ -50,7 +50,6 @@ class MainController
         if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedura
             if ($this->registerApplication->getInstallProcess() == "installing") {
                 if ($this->registerApplication->checkNonce($_GET['state'])) { // Nonce ellenőrzése
-                    file_put_contents("log.txt", $this->registerApplication->checkNonce($_GET['state']));
 
                     $this->regAppControll = new RegisterApplicationController($this->registerApplication, $this->appInfo);
 
