@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a371e034-f965-4945-a238-5e89d0f408ed" name="PHP" url="http://localhost/ShopifyDemoApp">
+        <fileTransfer port="0" mountedRoot="D:\WebDevelopment\ShopifyDemoApp" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
