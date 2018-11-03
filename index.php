@@ -29,7 +29,6 @@ use Controller\MainController;
         ?>
     </div>
 </div>
-<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 
