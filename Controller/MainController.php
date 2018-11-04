@@ -38,9 +38,11 @@ class MainController
         $listener->listen();
 
         $shopName = htmlspecialchars(strip_tags(trim($_GET["shop"])));
+        $hmac = htmlspecialchars(strip_tags(trim($_GET["hmac"])));
 
         $this->registerApplication = new RegisterApplication($shopName);
-        $auth = new Authenticate($_GET, $this->appInfo->getSecretKey(), $_GET["hmac"]);
+
+        $auth = new Authenticate($_GET, $this->appInfo->getSecretKey(), $hmac);
 
         if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedúra
             if ($this->registerApplication->getInstallProcess() == "installing") {
@@ -48,7 +50,7 @@ class MainController
 
                     $this->regAppControl = new RegisterApplicationController($this->registerApplication, $this->appInfo);
 
-                    $this->regAppControl->captureAccessCode(); // az accescode kinyerése az URL-ből
+                    $this->regAppControl->captureAccessCode(); // az accesscode kinyerése az URL-ből
 
                     $this->regAppControl->exchangeAccessCode(); // a accesstoken megszerzése
 

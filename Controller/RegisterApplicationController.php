@@ -35,8 +35,10 @@ class RegisterApplicationController
     }
 
     public function captureAccessCode(){
+        $accessCode = htmlspecialchars(strip_tags(trim($_GET["code"])));
+
         if(isset($_GET) && isset($_GET["code"])){
-            $this->registerApplication->addAccessCode($_GET["code"]);
+            $this->registerApplication->addAccessCode($accessCode);
         }
     }
 
