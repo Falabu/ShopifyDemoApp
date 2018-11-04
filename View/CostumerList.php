@@ -21,7 +21,7 @@ class CostumerList
     public function render()
     {
         echo "<h2>Vásárlók listája</h2>";
-        echo "<table class='table table-hover table-dark table-sm'>";
+        echo "<table class='table'>";
         echo "<tr>
         <th>Vezetéknév</th>
         <th>Keresztnév</th>

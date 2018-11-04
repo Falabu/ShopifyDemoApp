@@ -18,4 +18,4 @@ define("DB_NAME", "shopify");
 define("DB_UNAME", "root");
 define("DB_PASSWORD", "1986berciKe");
 define("DB_HOST", "localhost");
-define("MAIN_URL","https://349beb59.ngrok.io/");
+define("MAIN_URL","https://8ff39238.ngrok.io/");

@@ -41,7 +41,7 @@ class CreateWebhook
         $this->data = array(
             'webhook' => array(
                 'topic'     => $this->webhookName,
-                'address'   => "https://349beb59.ngrok.io/index.php",
+                'address'   => MAIN_URL . "index.php",
                 'format'    => "json"
             )
         );
