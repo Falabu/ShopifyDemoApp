@@ -8,6 +8,8 @@
 
 namespace Model;
 
+use Utils\ArrayToString;
+
 class Authenticate
 {
     private $hmac;
@@ -26,7 +28,8 @@ class Authenticate
     }
 
     public function echoAll(){
-       echo  $this->generatedHmac = hash_hmac('sha256', http_build_query($this->data), $this->key) . "<br>";
+        $arrayToString = new ArrayToString($this->data);
+       echo  $this->generatedHmac = hash_hmac('sha256', $arrayToString, $this->key) . "<br>";
        echo  $this->hmac;
     }
 
@@ -41,7 +44,9 @@ class Authenticate
     }
 
     private function Validate(){
-        $this->generatedHmac = hash_hmac('sha256', $this->data, $this->key);
+        $arrayToString = new ArrayToString($this->data);
+
+        $this->generatedHmac = hash_hmac('sha256', $arrayToString, $this->key);
     }
 
     private function extractHmac(){

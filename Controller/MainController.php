@@ -10,17 +10,18 @@ namespace Controller;
 
 
 use Model\AppInfo;
+use Model\Authenticate;
 use Model\RegisterApplication;
-use Model\ShopifyRequest;
 use Model\CreateWebhook;
 use Model\CreateCostumer;
 use Model\WebhookListener;
+use Model\GetCustomer;
 use View\CostumerList;
 
 
 class MainController
 {
-    private $regAppControll;
+    private $regAppControl;
     private $appInfo;
     private $registerApplication;
 
@@ -36,26 +37,19 @@ class MainController
 
         $listener->listen();
 
-        if ($listener->checkIfRequestHappend()) {
-            if ($listener->getTopic() == "app/uninstalled") {
-                $this->registerApplication = new RegisterApplication($listener->getName());
-                $this->registerApplication->uninstallApplication();
-                die();
-            }
-        }
 
         $this->registerApplication = new RegisterApplication($_GET["shop"]);
-
+        $auth = new Authenticate($_GET, $this->appInfo->getSecretKey(), $_GET["hmac"]);
 
         if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedura
             if ($this->registerApplication->getInstallProcess() == "installing") {
-                if ($this->registerApplication->checkNonce($_GET['state'])) { // Nonce ellenőrzése
+                if ($this->registerApplication->checkNonce($_GET['state']) && $auth->getResult()) { // Authentikáció
 
-                    $this->regAppControll = new RegisterApplicationController($this->registerApplication, $this->appInfo);
+                    $this->regAppControl = new RegisterApplicationController($this->registerApplication, $this->appInfo);
 
-                    $this->regAppControll->captureAccessCode(); // az accescode kinyerése az URL-ből
+                    $this->regAppControl->captureAccessCode(); // az accescode kinyerése az URL-ből
 
-                    $this->regAppControll->exchangeAccessCode(); // a accesstoken megszerzése
+                    $this->regAppControl->exchangeAccessCode(); // a accesstoken megszerzése
 
                     $this->registerApplication->updateInstallProcess(); // minden megvan az installáció befejezve
 
@@ -68,32 +62,30 @@ class MainController
                     $costumer->createCostumer($this->registerApplication->getAccessToken(), $this->registerApplication->getShopName());
 
                     //Telepítés kész vissza a shopify oldalára
-                    $this->regAppControll->redirectToShopifyAppPage();
+                    $this->regAppControl->redirectToShopifyAppPage();
                 } else {
                     echo "Request not from shopify";
                 }
-            } elseif ($this->registerApplication->getInstallProcess() == "installed") {
+            } elseif ($this->registerApplication->getInstallProcess() == "installed" && $auth->getResult()) {
+
                 //Az applikáció megnyitásakor ha minden rednben van itt indul a program
-                $data = array();
 
-                $curl = new ShopifyRequest($this->registerApplication->getShopName(), $this->registerApplication->getAccessToken(), $data, "/admin/customers.json", "GET");
+                $getCustomer = new GetCustomer($this->registerApplication->getShopName(), $this->registerApplication->getAccessToken());
 
-                $call = $curl->shopify_call();
+                $customerData = $getCustomer->getData();
 
-                $products = json_decode($call['response'], TRUE);
-
-                $customers = new CostumerList($products);
+                $customers = new CostumerList($customerData);
 
                 $customers->render();
 
             }
         } else {
             $this->registerApplication->addShop();
-            $this->regAppControll = new RegisterApplicationController($this->registerApplication, $this->appInfo);
+            $this->regAppControl = new RegisterApplicationController($this->registerApplication, $this->appInfo);
 
             $this->registerApplication->addScopes("read_products,read_orders,read_customers,write_customers"); // Jogok hozzáadása
 
-            $this->regAppControll->redirectForApproval();
+            $this->regAppControl->redirectForApproval();
 
         }
 

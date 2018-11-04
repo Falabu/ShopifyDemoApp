@@ -15,7 +15,7 @@ class WebhookListener
     private $name;
     private $headers;
 
-    function listen()
+    public function listen()
     {
         $this->headers = apache_request_headers();
 
@@ -28,30 +28,26 @@ class WebhookListener
             }
         }
 
+        $this->runWebHook();
+
     }
 
-    function checkIfRequestHappend(){
+    private function checkIfRequestHappend(){
         if(isset($this->name) && isset($this->topic)){
             return true;
         }
         return false;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
+
+    private function runWebHook(){
+        if ($this->checkIfRequestHappend()) {
+            if ($this->topic == "app/uninstalled") {
+                $registerApplication = new RegisterApplication($this->name);
+                $registerApplication->uninstallApplication();
+                die();
+            }
+        }
+
     }
-
-    /**
-     * @return mixed
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
-
-
 }
