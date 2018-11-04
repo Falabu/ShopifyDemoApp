@@ -12,7 +12,7 @@ require "Model\GetCustomer.php";
 require "Utils\ArrayToString.php";
 require "Controller\MainController.php";
 require "Controller\RegisterApplicationController.php";
-require "View\CostumerList.php";
+require "View\CustomerList.php";
 
 
 define("DB_NAME", "shopify");

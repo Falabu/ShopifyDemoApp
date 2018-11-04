@@ -8,7 +8,7 @@
 
 namespace View;
 
-class CostumerList
+class CustomerList
 {
     private $data;
 

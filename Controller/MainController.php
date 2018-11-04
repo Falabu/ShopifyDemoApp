@@ -16,7 +16,7 @@ use Model\CreateWebhook;
 use Model\CreateCostumer;
 use Model\WebhookListener;
 use Model\GetCustomer;
-use View\CostumerList;
+use View\CustomerList;
 
 
 class MainController
@@ -32,7 +32,7 @@ class MainController
 
     public function entryPoint()
     {
-        //Ha a webhook köld egy requestet végrehajtjuk a belépési pont legelején majd kilépünk az programból
+        //Figyeljük, hogy jött e webhook kérés
         $listener = new WebhookListener();
 
         $listener->listen();
@@ -55,11 +55,7 @@ class MainController
 
                     // Az alkalmazáshoz szükséges dolgok telepítése
 
-                    $webhook = new CreateWebhook("app/uninstalled");
-                    $costumer = new CreateCostumer("Dávid", "Kurucz", "david.kurucz@gmail.com");
-
-                    $webhook->createWebhook($this->registerApplication->getAccessToken(), $this->registerApplication->getShopName());
-                    $costumer->createCostumer($this->registerApplication->getAccessToken(), $this->registerApplication->getShopName());
+                    $this->installCredentials($this->registerApplication->getAccessToken(), $this->registerApplication->getShopName());
 
                     //Telepítés kész vissza a shopify oldalára
                     $this->regAppControl->redirectToShopifyAppPage();
@@ -74,7 +70,7 @@ class MainController
 
                 $customerData = $getCustomer->getData();
 
-                $customers = new CostumerList($customerData);
+                $customers = new CustomerList($customerData);
 
                 $customers->render();
 
@@ -90,6 +86,14 @@ class MainController
         }
 
 
+    }
+
+    private function installCredentials($accessToken, $shopname){
+        $webhook = new CreateWebhook("app/uninstalled");
+        $costumer = new CreateCostumer("Dávid", "Kurucz", "david.kurucz@gmail.com");
+
+        $webhook->createWebhook($accessToken, $shopname);
+        $costumer->createCostumer($accessToken, $shopname);
     }
 
 }
