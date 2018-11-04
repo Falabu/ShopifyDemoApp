@@ -31,11 +31,6 @@ class GetCustomer
         return $this->data;
     }
 
-    /***
-     * @param $shopname string Shopname
-     * @param $token string AccessToken
-     * @return array Customer data
-     */
     private function getAllCustomers(){
         $curl = new ShopifyRequest($this->shopName, $this->accessToken, array(), "/admin/customers.json", "GET");
 
