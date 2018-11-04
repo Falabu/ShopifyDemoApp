@@ -37,8 +37,9 @@ class MainController
 
         $listener->listen();
 
+        $shopName = htmlspecialchars(strip_tags(trim($_GET["shop"])));
 
-        $this->registerApplication = new RegisterApplication($_GET["shop"]);
+        $this->registerApplication = new RegisterApplication($shopName);
         $auth = new Authenticate($_GET, $this->appInfo->getSecretKey(), $_GET["hmac"]);
 
         if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedúra
@@ -75,7 +76,7 @@ class MainController
                 $customers->render();
 
             }
-        } else {
+        } else { // Belépési pont hamég nincs az applikáció installálva
             $this->registerApplication->addShop();
             $this->regAppControl = new RegisterApplicationController($this->registerApplication, $this->appInfo);
 
