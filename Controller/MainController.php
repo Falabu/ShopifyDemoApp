@@ -41,7 +41,7 @@ class MainController
         $this->registerApplication = new RegisterApplication($_GET["shop"]);
         $auth = new Authenticate($_GET, $this->appInfo->getSecretKey(), $_GET["hmac"]);
 
-        if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedura
+        if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedúra
             if ($this->registerApplication->getInstallProcess() == "installing") {
                 if ($this->registerApplication->checkNonce($_GET['state']) && $auth->getResult()) { // Authentikáció
 

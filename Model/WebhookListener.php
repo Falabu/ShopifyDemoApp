@@ -1,5 +1,8 @@
 <?php
 /**
+ * Az Shopify álltal küldött webhook kéréseket regisztrálja és annak megfelelően elindítja a webhookhoz tartozó algoritmust
+ *
+ *
  * Created by PhpStorm.
  * User: DaweTheDrummer
  * Date: 2018. 11. 03.
@@ -15,6 +18,11 @@ class WebhookListener
     private $name;
     private $headers;
 
+    /***
+     * A webhook fejlécének beállítása
+     *
+     *
+     */
     public function listen()
     {
         $this->headers = apache_request_headers();
@@ -32,6 +40,12 @@ class WebhookListener
 
     }
 
+    /***
+     * Ellenőrzi hogy a fejléc beállításra került, ha nem nem történt webooh kérés
+     *
+     * @return bool
+     *
+     */
     private function checkIfRequestHappend(){
         if(isset($this->name) && isset($this->topic)){
             return true;
@@ -39,7 +53,10 @@ class WebhookListener
         return false;
     }
 
-
+    /***
+     * Elindítja a webhookhoz tartozó algoritmust
+     *
+     */
     private function runWebHook(){
         if ($this->checkIfRequestHappend()) {
             if ($this->topic == "app/uninstalled") {

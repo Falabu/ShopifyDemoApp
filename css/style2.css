@@ -1,26 +1,16 @@
 body{
     background-color: #44467e;
-
 }
 
 h2{
     margin-bottom: 30px;
     color: whitesmoke;
+    text-align: center;
 }
 
 .maincontainer{
     margin: auto;
     padding: 30px;
-}
-
-.listcontainer{
-    text-align: center;
-    border: #1b1e21 solid 0;
-    border-radius: 5px;
-    background-color: rgba(28,34,95,.8);
-    padding: 10px;
-    box-shadow: 0 0 5px 3px rgba(0,0,0,.3);
-    -moz-box-shadow: 0 0 5px 3px black;
 }
 
 .checkyes{
@@ -31,6 +21,12 @@ h2{
     color: red;
 }
 
+table{
+    border-radius: 10px;
+    box-shadow: 0 0 5px 3px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 0 5px 3px rgba(0,0,0,.3);
+    text-align: center;
+}
 a{
     text-decoration: none;
     color: whitesmoke;

@@ -1,5 +1,8 @@
 <?php
 /**
+ * Mivel a http_build_query() függvény nem úgy kódolta a tömböt ahogy azt kéne, nem tudtam rájönni mi a baja.
+ * Az authentikációhoz meg szükséges az átalakítás.  Ezért készítettem ezt a kis osztályt erre.
+ *
  * Created by PhpStorm.
  * User: DaweTheDrummer
  * Date: 2018. 11. 03.
@@ -21,6 +24,10 @@ class ArrayToString
         $this->toString();
     }
 
+    /***
+     * Tömb stringé alakítása az értékek ellenőrzésével
+     *
+     */
     private function toString()
     {
         $separator = '';
