@@ -64,7 +64,7 @@ class MainController
                 }
             } elseif ($this->registerApplication->getInstallProcess() == "installed" && $auth->getResult()) {
 
-                //Az applikáció megnyitásakor ha minden rednben van itt indul a program
+                //Az applikáció megnyitásakor ha minden rendben van itt indul a program
 
                 $getCustomer = new GetCustomer($this->registerApplication->getShopName(), $this->registerApplication->getAccessToken());
 

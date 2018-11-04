@@ -2,12 +2,6 @@
 /**
  * A shopify API-val való kommunikációhoz szükséges osztály.
  *
- *
- *
- * Created by PhpStorm.
- * User: DaweTheDrummer
- * Date: 2018. 11. 02.
- * Time: 16:21
  */
 
 namespace Model;
