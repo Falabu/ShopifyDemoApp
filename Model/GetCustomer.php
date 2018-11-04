@@ -1,5 +1,7 @@
 <?php
 /**
+ * Lekéri a Shopify-tól az összes vásárlót
+ *
  * Created by PhpStorm.
  * User: DaweTheDrummer
  * Date: 2018. 11. 04.

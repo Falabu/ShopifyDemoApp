@@ -1,5 +1,7 @@
 <?php
 /**
+ * Az Hmac hash autentikációját végzi
+ *
  * Created by PhpStorm.
  * User: DaweTheDrummer
  * Date: 2018. 11. 02.
@@ -27,12 +29,12 @@ class Authenticate
         $this->extractHmac();
     }
 
-    public function echoAll(){
-        $arrayToString = new ArrayToString($this->data);
-       echo  $this->generatedHmac = hash_hmac('sha256', $arrayToString, $this->key) . "<br>";
-       echo  $this->hmac;
-    }
-
+    /**
+     * Visszaadja, hogy a hmac és a generált hmac azonos e
+     *
+     * @return bool
+     *
+     */
     public function getResult():bool {
         $this->Validate();
 
@@ -43,12 +45,20 @@ class Authenticate
         return false;
     }
 
+    /***
+     * Legenerálja az új hmacet
+     *
+     */
     private function Validate(){
         $arrayToString = new ArrayToString($this->data);
 
         $this->generatedHmac = hash_hmac('sha256', $arrayToString, $this->key);
     }
 
+    /***
+     * Kitörli a tömbböl a hamcet
+     *
+     */
     private function extractHmac(){
         $this->data = array_diff_key($this->query, array('hmac' => ''));
         ksort($this->data);
