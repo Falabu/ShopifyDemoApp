@@ -6,8 +6,8 @@ $( document ).ready(function() {
 	for (i = 0; i < 3; i++) {
 
 	
-	$(".cardExtendedInfo"+i).hide();
-    buttonPress(".downButton" + i,  ".cardExtendedInfo" + i);
+	$(".cardExtend_"+i).hide();
+    buttonPress(".downButton_" + i,  ".cardExtend_" + i);
 }
 	
 	
