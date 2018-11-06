@@ -44,6 +44,7 @@ class MainController
 
         $auth = new Authenticate($_GET, $this->appInfo->getSecretKey(), $hmac);
 
+
         if ($this->registerApplication->isShopRegistered()) { // Ellenőrzi, hogy már elindult-e a installációs procedúra
             if ($this->registerApplication->getInstallProcess() == "installing") {
                 if ($this->registerApplication->checkNonce($_GET['state']) && $auth->getResult()) { // Authentikáció
@@ -79,19 +80,24 @@ class MainController
 
             }
         } else { // Belépési pont hamég nincs az applikáció installálva
-            $this->registerApplication->addShop();
-            $this->regAppControl = new RegisterApplicationController($this->registerApplication, $this->appInfo);
+            if (isset($_GET["shop"])) {
+                $this->registerApplication->addShop();
+                $this->regAppControl = new RegisterApplicationController($this->registerApplication, $this->appInfo);
 
-            $this->registerApplication->addScopes("read_products,read_orders,read_customers,write_customers"); // Jogok hozzáadása
+                $this->registerApplication->addScopes("read_products,read_orders,read_customers,write_customers"); // Jogok hozzáadása
 
-            $this->regAppControl->redirectForApproval();
+                $this->regAppControl->redirectForApproval();
+            } else {
+                echo "Kell a bolt neve az installáláshoz!";
+            }
 
         }
 
 
     }
 
-    private function installCredentials($accessToken, $shopname){
+    private function installCredentials($accessToken, $shopname)
+    {
         $webhook = new CreateWebhook("app/uninstalled");
         $costumer = new CreateCostumer("Dávid", "Kurucz", "david.kurucz@gmail.com");
 

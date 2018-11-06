@@ -1,37 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Próba</title>
+    <link rel="stylesheet" href="css/style3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 </head>
 <body>
-<table class="table table-sm table-hover table-dark">
-    <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>E-mail</th>
-        <th>Létrehozás dátuma</th>
-    </tr>
-    <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>dadasasd@asdasdas.hu</td>
-        <td>1023.34.54</td>
-    </tr>
-    <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td>dadasasd@asdasdas.hu</td>
-        <td>1023.34.54</td>
-    </tr>
-    <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td>dadasasd@asdasdas.hu</td>
-        <td>1023.34.54</td>
-    </tr>
-</table>
-<script src="js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="card">
+        <div class="cardContainer">
+            <img class="userImage" src="images/image.jpg">
+            <div class="userInfo">
+                <h3>Julika Marika</h3>
+                <p><b>Email:</b> david.kurucz@gmail.com<br>
+                    <b>Telefon:</b> 0630/5124232<br>
+                    <b>Cím:</b> 1034 Budapest Baross utca 105
+                </p>
+            </div>
+            <div class="icons">
+                <i class="fas fa-envelope yes icon"><span class="tooltiptext">Email verefied</span></i>
+                <i class="fas fa-times-circle no icon"><span class="tooltiptext">Not active</span></i>
+                <i class="fas fa-arrow-circle-down downButton_0 downIcon"></i>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="cardExtend_0 extendedInfo">
+        <table class="table table-sm table-dark">
+            <tr>
+                <th>Eddigi költés</th>
+                <th>Eddigi vásárlás</th>
+                <th>Marketing</th>
+                <th>Regisztációs dátum</th>
+                <th>Pénznem</th>
+            </tr>
+            <tr>
+                <td>54333 HUF</td>
+                <td>5</td>
+                <td>Yes</td>
+                <td>2014.54.32 15:65</td>
+                <td>HUF</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/java.js"></script>
 </body>
 </html>
